@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @task_schedule.name %>
+</p>
+
+<p>
+  <strong>Due date:</strong>
+  <%= @task_schedule.due_date %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @task_schedule.user %>
+</p>
+
+<%= link_to 'Edit', edit_task_schedule_path(@task_schedule) %> |
+<%= link_to 'Back', task_schedules_path %>

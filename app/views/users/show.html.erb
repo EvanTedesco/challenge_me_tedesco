@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Task Schedules</strong>
+  <table>
+      <thead>
+        <th>
+          Name
+        </th>
+        <th>
+          Due Date
+        </th>
+      </thead>
+      <tbody>
+          <%= render @user.task_schedules %>
+      </tbody>
+  </table>
+</p>
+
+<p>
+  <strong>Tasks</strong>
+  <table>
+      <thead>
+        <th>
+          Name
+        </th>
+        <th>
+          Complete
+        </th>
+        <th>
+          Due Date
+        </th>
+      </thead>
+      <tbody>
+          <%= render @user.tasks %>
+      </tbody>
+  </table>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

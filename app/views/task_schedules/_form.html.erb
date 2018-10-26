@@ -1,0 +1,32 @@
+<%= form_with(model: task_schedule, local: true) do |form| %>
+  <% if task_schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task_schedule.errors.count, "error") %> prohibited this task_schedule from being saved:</h2>
+
+      <ul>
+      <% task_schedule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :task_schedule_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :due_date %>
+    <%= form.datetime_select :due_date, id: :task_schedule_due_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :task_schedule_user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
