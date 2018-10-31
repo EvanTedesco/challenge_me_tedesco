@@ -1,8 +1,8 @@
-<tr>
+<%= content_tag(:tr, data: {schedule_id: task_schedule.id}) do %>
   <td>
     <%= task_schedule.name %>
   </td>
   <td>
     <%= task_schedule.due_date %>
   </td>
-</tr>
+<% end %>
