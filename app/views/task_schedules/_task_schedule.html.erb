@@ -5,4 +5,15 @@
   <td>
     <%= task_schedule.due_date %>
   </td>
+  <td>
+    <%= form_with(model: TaskSchedule, url: create_task_task_schedule_path(task_schedule), method: :post) do %>
+      <%= hidden_field_tag(:completed, true) %>
+      <%= hidden_field_tag(:user_id, task_schedule.user.id) %>
+      <%= hidden_field_tag(:name, task_schedule.name) %>
+      <%= hidden_field_tag(:due_date, task_schedule.due_date) %>
+      <button>
+        <%= submit_tag "Complete Task" %>
+      </button>
+    <% end %>
+  </td>
 <% end %>

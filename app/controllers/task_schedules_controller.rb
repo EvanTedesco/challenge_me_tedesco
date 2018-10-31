@@ -1,5 +1,5 @@
 class TaskSchedulesController < ApplicationController
-  before_action :set_task_schedule, only: [:show, :edit, :update, :destroy]
+  before_action :set_task_schedule, only: [:show, :edit, :update, :destroy, :create_task]
 
   # GET /task_schedules
   # GET /task_schedules.json
@@ -58,6 +58,14 @@ class TaskSchedulesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to task_schedules_url, notice: 'Task schedule was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def create_task
+    task_params = params.permit(:name, :due_date, :user_id, :completed)
+    @task_schedule.add_task(task_params)
+    respond_to do |format|
+      format.js
     end
   end
 

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 def schedules_table
-  '.tasksSchedulesTable'
+  '#tasksSchedulesTable'
 end
 
 def tasks_table
-  '.tasksTable'
+  '#tasksTable'
 end
 
 Capybara.add_selector(:schedule_id) do
@@ -30,8 +30,6 @@ describe :user_path do
   end
 
   it 'renders user information' do
-    puts'*********************************************************************'
-
     expect(page).to have_content(@user.name)
     expect(page).to have_content(@user.email)
   end
@@ -55,18 +53,18 @@ describe :user_path do
       expect(page).to have_content(@task.completed)
     end
   end
-  #
-  # it 'completes a task' do
-  #   within(schedules_table) do
-  #     target_task = find_schedule_by_id(@user_task_schedules.first.id)
-  #     within(target_task) do
-  #       page.click_button('Complete Task')
-  #     end
-  #   end
-  #   table = page.find(tasks_table)
-  #   within(table) do
-  #     expected = @user_task_schedules[0].pluck(:name, :email)
-  #     expect(page).to have_content(expected[0])
-  #   end
-  # end
+
+  it 'completes a task', js: true do
+    within(schedules_table) do
+      target_task = find_schedule_by_id(@user_task_schedules.first.id)
+      within(target_task) do
+        page.click_button('Complete Task')
+      end
+    end
+    table = page.find(tasks_table)
+    within(table) do
+      expected = @user_task_schedules[0].slice(:name, :due_date)
+      expect(page).to have_content(expected[0])
+    end
+  end
 end
