@@ -28,7 +28,10 @@ module ObjectCreation
       }
       defaults.merge!(attrs)
       user_id = defaults.has_key?(:user_id) ? defaults[:user_id] : create_user.id
+      task_schedule_id = defaults.has_key?(:task_schedule_id) ? defaults[:task_schedule_id] : create_task.id
+
       defaults[:user_id] = user_id
+      defaults[:task_schedule_id] = task_schedule_id
       Task.create(defaults)
     end
   end

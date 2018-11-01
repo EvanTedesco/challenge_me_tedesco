@@ -25,7 +25,8 @@ describe :user_path do
       ObjectCreation.create_task_schedule({user_id: @user.id})
     end
     @user_task_schedules =  @user.task_schedules
-    @task = ObjectCreation.create_task({user_id: @user.id})
+    @completed_task = @user_task_schedules.first.add_task({completed: true})
+
     visit user_path(@user)
   end
 
@@ -47,23 +48,27 @@ describe :user_path do
   end
 
   it 'renders completed tasks' do
+
+    puts @completed_task.to_s
+    puts @user.to_s
     within(tasks_table) do
-      expect(page).to have_content(@task.name)
-      expect(page).to have_content(@task.due_date)
-      expect(page).to have_content(@task.completed)
+      expect(page).to have_content(@completed_task.name)
+      expect(page).to have_content(@completed_task.due_date)
+      expect(page).to have_content(@completed_task.completed)
     end
   end
 
   it 'completes a task', js: true do
+    first_schedule = @user_task_schedules.first
     within(schedules_table) do
-      target_task = find_schedule_by_id(@user_task_schedules.first.id)
+      target_task = find_schedule_by_id(first_schedule.id)
       within(target_task) do
         page.click_button('Complete Task')
       end
     end
     table = page.find(tasks_table)
     within(table) do
-      expected = @user_task_schedules[0].slice(:name, :due_date)
+      expected = first_schedule.slice(:name, :due_date)
       expect(page).to have_content(expected[0])
     end
   end

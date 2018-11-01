@@ -42,7 +42,7 @@
         </th>
       </thead>
       <tbody>
-          <%= render partial: '/tasks/tasks', collection: @user.tasks, as: :task %>
+      <%= render @user.tasks %>
       </tbody>
   </table>
 </p>
