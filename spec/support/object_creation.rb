@@ -31,7 +31,7 @@ module ObjectCreation
 
       defaults[:user_id] = user_id
       defaults[:task_schedule_id] = task_schedule_id
-      Task.create!(defaults)
+      Task.create(defaults)
     end
   end
 end

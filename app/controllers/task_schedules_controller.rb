@@ -1,5 +1,5 @@
 class TaskSchedulesController < ApplicationController
-  before_action :set_task_schedule, only: [:show, :edit, :update, :destroy, :create_task]
+  before_action :set_task_schedule, only: [:show, :edit, :update, :destroy, :add_task]
 
   # GET /task_schedules
   # GET /task_schedules.json
@@ -61,7 +61,7 @@ class TaskSchedulesController < ApplicationController
     end
   end
 
-  def create_task
+  def add_task
     task_params = params.permit(:name, :due_date, :user_id, :completed)
     @task_schedule.add_task(task_params)
     respond_to do |format|

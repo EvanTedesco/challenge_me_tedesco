@@ -1,0 +1,5 @@
+var taskTable = document.getElementById("tasksTable")
+taskTable.innerHTML = "<%=  j render  partial: '/users/tasksTable', locals: {tasks: @task_schedule.user_tasks} %>";
+
+var scheduleTable = document.getElementById("tasksSchedulesTable")
+scheduleTable.innerHTML = "<%=  j render partial: '/users/task_schedules_table', locals: {task_schedules: @task_schedule.user_task_schedules} %>";

@@ -6,7 +6,7 @@
     <%= task_schedule.due_date %>
   </td>
   <td>
-    <%= form_with(model: TaskSchedule, url: create_task_task_schedule_path(task_schedule), method: :post) do %>
+    <%= form_with(model: TaskSchedule, url: add_task_task_schedule_path(task_schedule), method: :post) do %>
       <%= hidden_field_tag(:completed, true) %>
       <button>
         <%= submit_tag "Complete Task", disabled: task_schedule.task_completed? %>

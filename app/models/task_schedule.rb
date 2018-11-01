@@ -16,4 +16,12 @@ class TaskSchedule < ApplicationRecord
   def task_completed?
     self.task.present? && self.task.completed.present?
   end
+
+  def user_tasks
+    self.user.tasks
+  end
+
+  def user_task_schedules
+    self.user.task_schedules
+  end
 end

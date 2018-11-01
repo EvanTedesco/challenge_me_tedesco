@@ -37,6 +37,39 @@ RSpec.describe TaskSchedule, type: :model do
     end
   end
 
+  context('user_tasks') do
+    it('gets the task for the user') do
+      user = ObjectCreation.create_user
+      random_user = ObjectCreation.create_user
+      associated_schedule = ObjectCreation.create_task_schedule({user_id: user.id})
+      random_schedule = ObjectCreation.create_task_schedule
+
+      expected_task1 = ObjectCreation.create_task(user_id: user.id, task_schedule_id: associated_schedule.id)
+      expected_task2 = ObjectCreation.create_task(user_id: user.id, task_schedule_id: associated_schedule.id)
+
+      un_expected_task1 = ObjectCreation.create_task(user_id: random_user.id, task_schedule_id: random_schedule.id)
+      un_expected_task2 = ObjectCreation.create_task(user_id: random_user.id, task_schedule_id: random_schedule.id)
+
+      actual = associated_schedule.user_tasks
+      expect(actual).to match_array([expected_task1, expected_task2])
+      expect(actual).to_not match_array([un_expected_task1, un_expected_task2])
+    end
+  end
+
+  context('user_task_schedules') do
+    it('gets the task schedules for the user') do
+      user = ObjectCreation.create_user
+      random_user = ObjectCreation.create_user
+      associated_schedule = ObjectCreation.create_task_schedule({user_id: user.id})
+      associated_schedule2 = ObjectCreation.create_task_schedule({user_id: user.id})
+      random_schedule = ObjectCreation.create_task_schedule({user_id: random_user})
+
+      actual = associated_schedule.user_task_schedules
+      expect(actual).to match_array([associated_schedule, associated_schedule2])
+      expect(actual).to_not match_array([random_schedule])
+    end
+  end
+
   context('task_completed?') do
     it('tells if the child task is complete') do
       incomplete_schedule = ObjectCreation.create_task_schedule
