@@ -12,4 +12,8 @@ class TaskSchedule < ApplicationRecord
     task_fields = variables.merge(target_attributes)
     Task.create(task_fields)
   end
+
+  def task_completed?
+    self.task.present? && self.task.completed.present?
+  end
 end

@@ -12,40 +12,14 @@
 
 <p>
   <strong>Task Schedules</strong>
-  <table  id="tasksSchedulesTable">
-      <thead>
-        <th>
-          Name
-        </th>
-        <th>
-          Due Date
-        </th>
-      </thead>
-      <tbody>
-          <%= render @user.task_schedules %>
-      </tbody>
-  </table>
+  <%= render partial: 'task_schedules_table', locals: {task_schedules: @user.task_schedules} %>
 </p>
 
 <p>
   <strong>Tasks</strong>
-  <table id="tasksTable">
-      <thead>
-        <th>
-          Name
-        </th>
-        <th>
-          Complete
-        </th>
-        <th>
-          Due Date
-        </th>
-      </thead>
-      <tbody>
-      <%= render @user.tasks %>
-      </tbody>
-  </table>
+  <%= render partial: 'tasksTable', locals: {tasks: @user.tasks} %>
 </p>
+
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
